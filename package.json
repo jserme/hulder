@@ -1,0 +1,12 @@
+{
+	"name": "hulder",
+	"description": "生成占位图的小程序",
+	"url": "http://hulder.jser.me",
+	"author": "dev.hubo@gmail.com",
+	"contributors": [],
+	"dependencies": {
+		"express": ">=2.2.2",
+		"canvas": ">=0.5.3"
+	}, "version": "0.0.1"
+}
+
