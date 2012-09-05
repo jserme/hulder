@@ -105,8 +105,7 @@
 
   app.get('/', function(req, res) {
     return res.render('index', {
-      title: 'hulder...',
-      des: ['使用说明', '1.绑定一个host', '   10.2.17.30 holder', '2.需要图片的地方使用', '   http://holder/宽/高', '意见建议邮件 dev.hubo@gmail.com'].join('\n')
+      title: 'hulder...'
     });
   });
 
