@@ -3,6 +3,7 @@ Hulder是一个根据URL生成自动占位图的小工具
 
 ##安装
 git clone https://github.com/jserme/hulder.git 
+
 npm install
 
 ##运行
@@ -10,6 +11,8 @@ node server.js
 
 ##图片生成器
 http://localhost:8325/400x300
+
+http://localhost:8325/宽x高/前景色x背景色/图片上的文字
 
 ##示例
 

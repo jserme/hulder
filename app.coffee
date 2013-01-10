@@ -1,14 +1,11 @@
 express = require 'express'
+http = require 'http'
 app = express()
 Canvas = require 'canvas'
 
 #500 && 400
 #Example 500 page
 errorHandler = (err, req, res, next)->   
-	res.status 500
-	res.render 'err500', 
-		title: '错误啦'
-		msg: '服务器出了点问题'
 
 
 #Configuration
@@ -20,11 +17,6 @@ app.configure ->
 	app.use app.router
 	app.use express.static __dirname + '/public'
 	app.use errorHandler
-
-app.use (req, res)-> 
-	res.render 'not400', 
-		title: '没有啦',
-		msg: '这个。。。。真木有'
 
 getAndCheck = (req, res, next)->
 	wh = req.params.wh
@@ -107,5 +99,11 @@ app.get '/:wh/:color?/:text?', getAndCheck, getImageBody, (req, res) ->
 	res.send req.bufImage
 	req = null;
 
-app.listen 8325
+app.get '/', (req, res)-> 
+	res.status 500
+	res.render 'err500', 
+		title: '错误啦'
+		msg: '服务器出了点问题'
 
+httpServer = http.createServer app 
+httpServer.listen 8325
