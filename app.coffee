@@ -2,51 +2,47 @@ express = require 'express'
 http = require 'http'
 app = express()
 Canvas = require 'canvas'
-
-#500 && 400
-#Example 500 page
-errorHandler = (err, req, res, next)->   
-
+port = 8325
 
 #Configuration
 app.configure ->
-	app.set 'views', __dirname + '/views'
-	app.set 'view engine', 'jade'
-	app.use express.bodyParser()
-	app.use express.methodOverride()
-	app.use app.router
-	app.use express.static __dirname + '/public'
-	app.use errorHandler
+    app.set 'views', __dirname + '/views'
+    app.set 'view engine', 'jade'
+    app.use express.bodyParser()
+    app.use express.methodOverride()
+    app.use app.router
+    app.use express.static __dirname + '/public'
+    app.use express.logger 'dev'
 
 getAndCheck = (req, res, next)->
-	wh = req.params.wh
-	color = req.params.color
-	text = req.params.text
-
-	#console.log( wh, color, text);
-	canvasParams = {};
-
-	if wh and wh.trim() 
-		owh = wh.toLowerCase().split('x');
-		canvasParams.width = + owh[0];
-		canvasParams.height = + owh[1];
-
-	if color and color.trim() 
-		ocolor = color.toLowerCase().split('x');
-		canvasParams.foreground = ocolor[0];
-		canvasParams.background = ocolor[1];
-
-	if text and text.trim() 
-		canvasParams.text = text;
-
-	#console.log(canvasParams);
-	if isNaN( + canvasParams.width) or isNaN( + canvasParams.height)
-		res.render 'err500', 
-			title: '错误啦',
-			msg: '参数不合法'
-	else 
-		req.canvasParams = canvasParams;
-		next();
+    wh = req.params.wh
+    color = req.params.color
+    text = req.params.text
+    
+    #console.log( wh, color, text);
+    canvasParams = {};
+    
+    if wh and wh.trim() 
+    	owh = wh.toLowerCase().split('x');
+    	canvasParams.width = + owh[0];
+    	canvasParams.height = + owh[1];
+    
+    if color and color.trim() 
+    	ocolor = color.toLowerCase().split('x');
+    	canvasParams.foreground = ocolor[0];
+    	canvasParams.background = ocolor[1];
+    
+    if text and text.trim() 
+    	canvasParams.text = text;
+    
+    #console.log(canvasParams);
+    if isNaN( + canvasParams.width) or isNaN( + canvasParams.height)
+    	res.render 'err500', 
+    		title: '错误啦',
+    		msg: '参数不合法'
+    else 
+    	req.canvasParams = canvasParams;
+    	next();
 
 hex2rgb = (hexStr)->
 	hexStr = hexStr.replace /#/g, ''
@@ -99,11 +95,12 @@ app.get '/:wh/:color?/:text?', getAndCheck, getImageBody, (req, res) ->
 	res.send req.bufImage
 	req = null;
 
-app.get '/', (req, res)-> 
+app.get '*', (req, res)-> 
 	res.status 500
 	res.render 'err500', 
 		title: '错误啦'
 		msg: '服务器出了点问题'
 
 httpServer = http.createServer app 
-httpServer.listen 8325
+httpServer.listen port, ()->
+	console.log("Express server listening on port %d in %s mode", port, app.get('env'));
