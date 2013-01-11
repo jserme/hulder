@@ -5,7 +5,7 @@
 	"author": "dev.hubo@gmail.com",
 	"contributors": [],
 	"dependencies": {
-		"express": ">=2.2.2",
+		"express": "0.3.0",
 		"canvas": ">=0.5.3"
 	}, "version": "0.0.1"
 }
