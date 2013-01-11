@@ -17,6 +17,8 @@ node dev_app.js //监控js更改，实时重启
 ##图片生成器
 http://localhost:8325/400x300
 
+http://localhost:8325/宽x高/前景色x背景色/图片上的文字
+
 ##示例
 
 ###宽400高300的图
