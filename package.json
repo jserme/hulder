@@ -1,12 +1,20 @@
 {
-	"name": "hulder",
-	"description": "生成占位图的小程序",
-	"url": "http://hulder.jser.us",
-	"author": "dev.hubo@gmail.com",
-	"contributors": [],
-	"dependencies": {
-		"express": "3.0.0",
-		"canvas": ">=0.5.3"
-	}, "version": "0.0.1"
+  "name": "hulder",
+  "description": "生成占位图的小程序",
+  "author": "dev.hubo@gmail.com",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "contributors": [],
+  "dependencies": {
+    "canvas": "^2.3.1",
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  },
+  "version": "0.0.1",
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "standard": "^12.0.1"
+  }
 }
-
